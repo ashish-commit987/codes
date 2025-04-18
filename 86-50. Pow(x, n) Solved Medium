@@ -15,12 +15,12 @@ class Solution {
             n=-1*n;
             x=1/x;
         }
+        double temp=Pow(x,n/2);
         if(n%2==1){
-            return x*(Pow(x,n-1));
+            return x*temp*temp;
         }
         else{
-            double half=Pow(x,n/2);
-            return half*half;
+            return temp*temp;
         }
     }
 }
