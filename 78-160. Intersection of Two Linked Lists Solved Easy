@@ -1,0 +1,102 @@
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode(int x) {
+ *         val = x;
+ *         next = null;
+ *     }
+ * }
+ */
+// public class Solution {
+//     public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
+//       ListNode curr=headA;
+//       HashSet<ListNode> map=new HashSet<>();
+//       while(curr!=null){
+//         map.add(curr);
+//         curr=curr.next;
+//       }  
+//       curr=headB;
+//       while(curr!=null){
+//         if(map.contains(curr)){
+//             return curr;
+//         }
+//         curr=curr.next;
+//       }
+//       return null;
+//     }
+// }
+
+// without any extra space hashset
+
+// public class Solution {
+//     public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
+//       ListNode currA=headA;
+//       int countA=0;
+//       int diff=0;
+//       while(currA!=null){
+//         countA++;
+//         currA=currA.next;
+//       }
+
+//       ListNode currB=headB;
+//       int countB=0;
+//       while(currB!=null){
+//         countB++;
+//         currB=currB.next;
+//       }
+
+//       if(countA>countB){
+//         diff=countA-countB;
+//         int tempA=0;
+//         currA=headA;
+//         while(tempA!=diff){
+//             currA=currA.next;
+//             tempA++;
+//         }
+//         currB=headB;
+//         while(currB!=null && currA!=null){
+//             if(currA==currB){
+//                 return currA;
+//             }
+//             currB=currB.next;
+//             currA=currA.next;
+//         }
+//       }
+//       else{
+//         diff=countB-countA;
+//         int tempB=0;
+//         currB=headB;
+//         while(tempB!=diff){
+//             currB=currB.next;
+//             tempB++;
+//         }
+//         currA=headA;
+//         while(currB!=null && currA!=null){
+//             if(currA==currB){
+//                 return currA;
+//             }
+//             currB=currB.next;
+//             currA=currA.next;
+//         }
+//       }
+//       return null;
+//     }
+// }
+
+//most optimal soltion
+
+public class Solution {
+    public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
+ 
+      ListNode currA=headA;
+      ListNode currB=headB;
+      while(currA!=currB){
+        currA=(currA==null)?headB:currA.next;
+        currB=(currB==null)?headA:currB.next;
+      }
+      return currA;
+    }
+}
+https://leetcode.com/problems/intersection-of-two-linked-lists/
