@@ -1,0 +1,25 @@
+class Solution {
+    private long mod=1000000007;
+    public int countGoodNumbers(long n) {
+        long count=1;
+        
+        long evenno=(n+1)/2;
+        long oddno=n/2;
+        long first=power(5,evenno)%mod;
+        long second=power(4,oddno)%mod;
+        return (int)((first*second)%mod);
+    }
+    private long power(long x,long n){
+        if(n==0) return 1;
+        long y=n/2;
+        long temp=power(x,y);
+
+        if(n%2==0){
+            return (temp*temp)%mod;
+        }
+        else{
+            return (x*temp*temp)%mod;
+        }
+    }
+}
+https://leetcode.com/problems/count-good-numbers/
