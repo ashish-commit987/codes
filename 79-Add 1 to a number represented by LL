@@ -1,0 +1,40 @@
+import java.util.* ;
+import java.io.*; 
+/****************************************************************
+
+    Following is the class structure of the Node class:
+
+      class Node<T> {
+        T data;
+        Node<T> next;
+        Node<T> prev;
+
+        public Node(T data) {
+            this.data = data;
+        }
+    }
+
+*****************************************************************/
+
+public class Solution {
+
+    public static boolean findPair(Node<Integer> head, int k) {
+        Node<Integer> head1 = head;
+
+        while (head1 != null) {
+            Node<Integer> head2 = head1.next;
+
+            while (head2 != null) {
+                int sum = head1.data + head2.data;
+                if (sum == k) {
+                    return true; // ? Found a pair
+                }
+                head2 = head2.next;
+            }
+            head1 = head1.next;
+        }
+
+        return false; // ? No pair found
+    }
+}
+https://www.naukri.com/code360/problems/add-one-to-linked-list_920557
