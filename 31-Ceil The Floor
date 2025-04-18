@@ -1,0 +1,55 @@
+// class Solution {
+//     public int[] getFloorAndCeil(int x, int[] arr) {
+//         // code here
+//         Arrays.sort(arr);
+//         int start=0;
+//         int end=arr.length-1;
+//         int floor=-1,ceil=-1;
+//         while(start<=end){
+//             int mid=start+(end-start)/2;
+//             if(arr[mid]==x){
+//               return new int[]{arr[mid],arr[mid]};  
+//             }
+            
+//             else if(arr[mid]>x){
+//                 ceil=arr[mid];
+//                 end=mid-1;
+//             }
+//             else{
+//                 start=mid+1;
+//                 floor=arr[mid];
+//             }
+//         }
+//         return new int[]{floor,ceil};
+//     }
+// }
+
+// optimal without O(nlogn)
+
+class Solution {
+
+    public int[] getFloorAndCeil(int x, int[] arr) {
+        // write code here
+        int floor=-1,ceil=-1;
+        for(int num:arr){
+            if(num==x){
+                floor=num;
+                ceil=num;
+            }
+            else if(num<x){
+                floor=Math.max(floor,num);
+            }
+            else if(num>x){
+                if(ceil==-1){
+                    ceil=num;
+                }
+                else{
+                    ceil=Math.min(ceil,num);
+                }
+            }
+        }
+        return new int[]{floor,ceil};
+    }
+}
+
+https://www.geeksforgeeks.org/problems/ceil-the-floor2802/1
