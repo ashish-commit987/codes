@@ -1,0 +1,6 @@
+class Solution {
+    public int kthElement(int a[], int b[], int k) {
+        // code here
+    }
+}
+https://www.geeksforgeeks.org/problems/k-th-element-of-two-sorted-array1317/1
