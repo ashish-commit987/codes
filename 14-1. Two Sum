@@ -1,0 +1,37 @@
+/*class Solution {
+    public int[] twoSum(int[] nums, int target) {
+        int sum=0;
+        for (int i = 0; i < nums.length; i++){
+            for (int j = nums.length-1; j > 0; j--){
+                sum=nums[i]+nums[j];
+                if(sum==target){
+                    return new int[] {i,j};
+                    }
+            }
+        }
+        return null;
+    }
+}*/
+
+//2nd SOLUTION-OPTIMIZED
+
+class Solution {
+    public int[] twoSum(int[] nums, int target) {
+        int pair[]=new int[2];
+        HashMap<Integer,Integer> map=new HashMap<>();
+        for(int i=0;i<nums.length;i++){
+            int result=target-nums[i];
+            if(map.get(result)!=null){
+                pair[0]=map.get(result);
+                pair[1]=i;
+            }
+            else{
+                map.put(nums[i],i);
+            }
+        }
+        return pair;
+    }
+}
+
+// In the map, keys and values are paired as key:value.and we can call only keys.
+ https://leetcode.com/problems/two-sum/
