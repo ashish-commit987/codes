@@ -1,0 +1,5 @@
+class Solution {
+    public int findKRotation(List<Integer> arr) {
+        // Code here
+    }
+}
