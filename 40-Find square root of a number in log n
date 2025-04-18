@@ -1,0 +1,18 @@
+class Solution {
+    public int mySqrt(int x) {
+        int start = 1;
+        int end = x;
+        while (start <= end) {
+            int mid = start + (end - start) / 2;
+            if (mid <= x / mid) {  // Avoid overflow
+                start = mid + 1;
+            } else {
+                end = mid - 1;
+            }
+        }
+        return end;
+    }
+}
+
+// gfg waale mein mid*mid use kia tha lekinn yha par overflow  aa rha tha to x / mid use kra hai.gfg waala dekh lio
+https://leetcode.com/problems/sqrtx/
