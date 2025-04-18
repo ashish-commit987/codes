@@ -1,0 +1,6 @@
+class Solution {
+    int upperBound(int[] arr, int target) {
+        // code here
+    }
+}
+https://www.geeksforgeeks.org/problems/implement-upper-bound/0
