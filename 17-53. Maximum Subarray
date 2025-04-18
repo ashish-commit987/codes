@@ -1,0 +1,17 @@
+class Solution {
+    public int maxSubArray(int[] nums) {
+        int currsum=0;
+        int maxsum=Integer.MIN_VALUE;
+        for(int i=0;i<nums.length;i++){
+            currsum+=nums[i];
+            maxsum=Math.max(maxsum,currsum);
+            if(currsum<0){
+                currsum=0;
+            }
+        }
+        return maxsum;
+    }
+}
+
+// yeh kadane's algo par based hai that is iska concept hai ki agar koi positive number aur negative number add ho aur unka sum postive aaye to usse hum lekr chalenge but agr unka addition negative aaye to use drop kardo(0 kardo). And oviously if all are positive to koi prob nhi hai because net to positive hi aayega.
+https://leetcode.com/problems/maximum-subarray/
