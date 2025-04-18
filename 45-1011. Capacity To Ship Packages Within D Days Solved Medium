@@ -1,0 +1,59 @@
+// class Solution {
+//     public int shipWithinDays(int[] weights, int days) {
+//         int total=0;
+//         int max=Integer.MIN_VALUE;
+//         for(int num: weights){
+//             max=Math.max(max,num);
+//             total=total+num;
+//         }
+//         for(int i=max;i<=total;i++){
+//             int sum=0;int rday=1;
+//             for(int j=0;j<weights.length;j++){
+//                 if(sum+weights[j]>i){
+//                     rday++;
+//                     sum=0;
+//                 }
+//                 sum=sum+weights[j];
+//             }
+//             if(rday<=days){
+//                 return i;
+//             }
+//         }
+//         return -1;
+//     }
+// }
+
+// optimal solution
+
+class Solution {
+    public int shipWithinDays(int[] weights, int days) {
+        int max=Integer.MIN_VALUE;
+        int total=0;
+        for(int weight: weights){
+            max=Math.max(max,weight);
+            total=total+weight;
+        }
+        int start=max;
+        int end=total;
+        while(start<=end){
+            int mid=start+(end-start)/2;
+            int sum=0;
+            int count=1;
+            for(int weight:weights){
+                if(sum+weight>mid){
+                    count++;
+                    sum=0;
+                }
+                sum=sum+weight;
+            }
+                if(count>days){
+                    start=mid+1;
+                }
+                else{
+                    end=mid-1;
+                }
+        }
+        return start;
+    }
+}
+https://leetcode.com/problems/capacity-to-ship-packages-within-d-days/
