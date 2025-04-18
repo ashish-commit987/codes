@@ -1,0 +1,31 @@
+/*
+    Time Complexity: O(N)
+    Space Complexity: O(N)
+
+    Where N is the number of nodes in the doubly linked list.
+*/
+
+import java.util.HashMap;
+
+public class Solution {
+
+    public static boolean findPair(Node<Integer> head, int k) {
+        Node<Integer> ptr1 = head;
+        HashMap<Integer, Integer> myMap = new HashMap<Integer, Integer>();
+
+        // Traverse the linked list to the end.
+        while (ptr1 != null) {
+            int val = ptr1.data;
+            if (myMap.containsKey(k - val) != false) {
+                return true;
+            }
+
+            myMap.put(val, 1);
+            ptr1 = ptr1.next;
+        }
+
+        return false;
+    }
+
+}
+https://www.naukri.com/code360/problems/find-pair-with-a-given-sum-in-a-doubly-linked-list_1164172
