@@ -1,0 +1,29 @@
+class Solution {
+    public String reverseWords(String s) {
+        s = s.trim(); // Remove leading and trailing spaces
+        StringBuilder result = new StringBuilder();
+        StringBuilder word = new StringBuilder();
+        
+        for (int i = s.length() - 1; i >= 0; i--) {
+            if (s.charAt(i) != ' ') {
+                word.insert(0, s.charAt(i)); // Build word
+            } else if (word.length() > 0) {
+                if (result.length() > 0) {
+                    result.append(" ");
+                }
+                result.append(word);
+                word.setLength(0); // Reset word
+            }
+        }
+        
+        if (word.length() > 0) {
+            if (result.length() > 0) {
+                result.append(" ");
+            }
+            result.append(word);
+        }
+        
+        return result.toString();  
+    }
+}
+https://leetcode.com/problems/reverse-words-in-a-string/description/
