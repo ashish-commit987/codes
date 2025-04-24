@@ -1,0 +1,23 @@
+class GfG {
+    public Stack<Integer> sort(Stack<Integer> s) {
+        // add code here.
+        if(!s.isEmpty()){
+            int temp=s.pop();
+            sort(s);
+            insert(s,temp);
+        }
+        return s;
+    }
+    
+    public void insert(Stack<Integer> s, int element){
+        if(s.isEmpty() || s.peek()<=element){
+            s.push(element);
+        }
+        else{
+            int temp=s.pop();
+            insert(s,element);
+            s.push(temp);
+        }
+    }
+}
+https://www.geeksforgeeks.org/problems/sort-a-stack/1
