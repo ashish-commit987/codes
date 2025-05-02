@@ -1,0 +1,24 @@
+class Solution {
+    public List<List<Integer>> combinationSum(int[] candidates, int target) {
+        List<Integer> smallList=new ArrayList<>();
+        List<List<Integer>> bigList=new ArrayList<>();
+        int index=0;
+        helper(smallList,bigList,candidates,target,index);
+        return bigList;
+    }
+    public void helper(List<Integer> smallList,List<List<Integer>> bigList,int[] candidates,int target,int index){
+        if(target==0){
+            bigList.add(new ArrayList<Integer>(smallList));
+            return;
+        }
+        if(target<0){
+            return;
+        }
+        for(int i=index;i<candidates.length;i++){
+            smallList.add(candidates[i]);
+            helper(smallList,bigList,candidates,target-candidates[i],i);
+            smallList.remove(smallList.size()-1);
+        }
+    }
+}
+https://leetcode.com/problems/combination-sum/
