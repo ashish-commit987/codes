@@ -1,0 +1,23 @@
+class Solution {
+    public int[] AllPrimeFactors(int N) {
+        // code here
+        List<Integer> list=new ArrayList<>();
+        for(int i=2;i*i<=N;i++){
+            if(N%i==0){
+                list.add(i);
+                while(N%i==0){
+                    N=N/i;
+                }
+            }
+        }
+        if(N!=1){
+            list.add(N);
+        }
+        int result[]=new int[list.size()];
+        for(int i=0;i<list.size();i++){
+            result[i]=list.get(i);
+        }
+        return result;
+    }
+}
+https://www.geeksforgeeks.org/problems/prime-factors5052/1
