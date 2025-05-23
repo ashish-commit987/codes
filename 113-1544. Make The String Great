@@ -1,0 +1,23 @@
+class Solution {
+    public String makeGood(String s) {
+        if(s.length()==1){
+            return s;
+        }
+        Stack<Character> stack=new Stack<>();
+        for(char Char: s.toCharArray()){
+            if(!stack.isEmpty() && Math.abs(stack.peek()-Char)==32){
+                stack.pop();
+            }
+        
+            else{
+                stack.push(Char);
+            }
+        }
+        StringBuilder sb=new StringBuilder();
+        for(char str:stack){
+            sb.append(str);
+        }
+        return sb.toString();
+    }
+}
+https://leetcode.com/problems/make-the-string-great/
