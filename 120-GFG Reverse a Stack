@@ -1,0 +1,24 @@
+// User function Template for Java
+
+class Solution {
+    static void reverse(Stack<Integer> s) {
+        // add your code here
+        if(s.isEmpty()){
+            return;
+        }
+        int top=s.pop();
+        reverse(s);
+        insertAtBottom(top,s);
+    }
+    static void insertAtBottom(int topvalue, Stack<Integer> stack){
+        if(stack.isEmpty()){
+            stack.push(topvalue);
+            return;
+        }
+        int top=stack.pop();
+        insertAtBottom(topvalue,stack);
+        stack.push(top);
+        return;
+    }
+}
+https://www.geeksforgeeks.org/problems/reverse-a-stack/1
