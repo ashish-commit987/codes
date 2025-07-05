@@ -1,0 +1,27 @@
+/*Complete the function below*/
+class GfG {
+    public Stack<Integer> sort(Stack<Integer> s) {
+        // add code here.
+        helperr(s);
+        return s;
+    }
+    public void helperr(Stack<Integer> s){
+        if(s.isEmpty()){
+            return;
+        }
+        int top=s.pop();
+        sort(s);
+        helper(s,top);
+        //return s;
+    }
+    public void helper(Stack<Integer> stack,int top){
+        if(stack.isEmpty() || stack.peek()<top){
+            stack.push(top);
+            return;
+        }
+        int topvalue=stack.pop();
+        helper(stack,top);
+        stack.push(topvalue);
+    }
+}
+https://www.geeksforgeeks.org/problems/sort-a-stack/1
