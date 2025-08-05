@@ -1,0 +1,20 @@
+class Solution {
+    public int numberOfSubarraysAtmax(int[] nums, int k) {
+        int l=0;
+        int sum=0;
+        int count=0;
+        for(int r=0;r<nums.length;r++){
+            sum+=(nums[r])%2;
+            while(sum>k && l<=r){
+                sum=sum-(nums[l])%2;
+                l++;
+            }
+            count=count+(r-l+1);
+        }
+        return count;
+    }
+    public int numberOfSubarrays(int[] nums, int k) {
+        return numberOfSubarraysAtmax(nums, k)-numberOfSubarraysAtmax(nums,k-1);
+    }
+}
+https://leetcode.com/problems/count-number-of-nice-subarrays/
