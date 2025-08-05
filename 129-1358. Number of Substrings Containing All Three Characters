@@ -1,0 +1,26 @@
+class Solution {
+    public int numberOfSubstrings(String s) {
+        int l=0;
+        int currCount=0;
+        int count=0;
+        int freq[]=new int[3];
+        for(int r=0;r<s.length();r++){
+            char ch=s.charAt(r);
+            freq[ch-'a']++;
+            if(freq[ch-'a']==1){
+                currCount++;
+            }
+            while(currCount==3){
+                count=count+(s.length()-r);
+                char c=s.charAt(l);
+                freq[c-'a']--;
+                if(freq[c-'a']==0){
+                    currCount--;
+                }
+                l++;
+            }
+        }
+        return count;
+    }
+}
+https://leetcode.com/problems/number-of-substrings-containing-all-three-characters/
