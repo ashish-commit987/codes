@@ -1,0 +1,36 @@
+class Solution {
+    public static class helper{
+        int value,weight;
+        double ratio;
+        
+        helper(int value,int weight){
+            this.value=value;
+            this.weight=weight;
+            this.ratio=(double)value/weight;
+        }
+        
+    }
+    double fractionalKnapsack(int[] values, int[] weights, int W) {
+        // code here
+        helper[] items=new helper[values.length];
+        for(int i=0;i<values.length;i++){
+            items[i]=new helper(values[i],weights[i]);
+        }
+        Arrays.sort(items,(a,b)->Double.compare(b.ratio,a.ratio));
+        double totalitems=0.0;
+        int remaining=W;
+        for(helper item:items){
+            if(remaining>=item.weight){
+                totalitems+=item.value;
+                remaining-=item.weight;
+            }
+            else{
+                totalitems+=item.ratio*remaining;
+                break;
+            }
+        }
+        return totalitems;
+    }
+}
+
+https://www.geeksforgeeks.org/problems/fractional-knapsack-1587115620/1
