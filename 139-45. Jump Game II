@@ -1,0 +1,19 @@
+class Solution {
+    public int jump(int[] nums) {
+        int n=nums.length;
+        int lj=0,jump=0,coverage=0,destination=n-1;
+        if(nums.length==1) return 0;
+        for(int i=0;i<n;i++){
+            coverage=Math.max(coverage,(i+nums[i]));
+            if(i==lj){
+                lj=coverage;
+                jump++;
+                if(coverage>=destination){
+                    return jump;
+                }
+            }
+        }
+        return jump;
+    }
+}
+https://leetcode.com/problems/jump-game-ii/
