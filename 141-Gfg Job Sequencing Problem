@@ -1,0 +1,58 @@
+class Pair{
+    int deadline,profit;
+    Pair(int deadline,int profit){
+        this.deadline=deadline;
+        this.profit=profit;
+    }
+    
+    
+}
+
+class Solution {
+    int[] Parent;
+    
+    private int find(int x){
+        if (Parent[x]==x) return x;
+        Parent[x]=find(Parent[x]);
+        return Parent[x];
+    }
+    
+    public ArrayList<Integer> jobSequencing(int[] deadline, int[] profit) {
+        // code here
+        int n=deadline.length;
+        Pair[] arr=new Pair[n];
+        
+        for(int i=0;i<n;i++){
+            arr[i]=new Pair(deadline[i],profit[i]);
+        }
+        
+        Arrays.sort(arr,(p1,p2)->p2.profit-p1.profit);
+        
+        int maxded=0;
+        for(int i=0;i<n;i++){
+            if(arr[i].deadline>maxded){
+                maxded=arr[i].deadline;
+            }
+        }
+        maxded=Math.min(maxded,n);
+        
+        Parent =new int[maxded+1];
+        for(int i=0;i<=maxded;i++){
+            Parent[i]=i;
+        }
+        int total=0,count=0;
+        for(int i=0;i<n;i++){
+            int available=find(Math.min(arr[i].deadline,maxded));
+            if(available>0){
+                total+=arr[i].profit;
+                count++;
+                Parent[available]=find(available-1);
+            }
+        }
+        ArrayList<Integer> list=new ArrayList<>();
+        list.add(count);
+        list.add(total);
+        return list;
+    }
+}
+https://www.geeksforgeeks.org/problems/job-sequencing-problem-1587115620/1
