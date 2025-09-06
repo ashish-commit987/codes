@@ -34,7 +34,6 @@
 //     }
 // }
 
-// Optimised Solution
 class Solution {
     public int candy(int[] ratings) {
         int n = ratings.length;
@@ -60,7 +59,12 @@ class Solution {
             else { 
                 up = 0;
                 down++;
-                candies += 1 + down - (peak >= down ? 1 : 0);
+                if(peak>=down){
+                    candies=candies+1+down-1;   // down-1 isliye kara hai kyuki neeche jaise hi slope badta jaa rha hai hum ek extra de rhe hai prev se.
+                }
+                else{
+                    candies=candies+1+down-1+1; // +1 end mein peek ko ek se inc karne ke liye
+                }
             }
         }
 
