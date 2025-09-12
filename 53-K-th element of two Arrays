@@ -1,6 +1,35 @@
 class Solution {
     public int kthElement(int a[], int b[], int k) {
-        // code here
+        int n = a.length, m = b.length;
+        int i = 0, j = 0, count = 0;
+        int result = -1;
+
+        while (i < n && j < m) {
+            if (a[i] < b[j]) {
+                result = a[i];
+                i++;
+            } else {
+                result = b[j];
+                j++;
+            }
+            count++;
+            if (count == k) return result;
+        }
+
+        while (i < n) {
+            result = a[i];
+            i++;
+            count++;
+            if (count == k) return result;
+        }
+
+        while (j < m) {
+            result = b[j];
+            j++;
+            count++;
+            if (count == k) return result;
+        }
+
+        return -1;
     }
 }
-https://www.geeksforgeeks.org/problems/k-th-element-of-two-sorted-array1317/1
