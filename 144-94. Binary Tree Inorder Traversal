@@ -13,19 +13,42 @@
  *     }
  * }
  */
+
+ // Recursive Approach
+// class Solution {
+//     public List<Integer> inorderTraversal(TreeNode root) {
+//         List<Integer> list=new ArrayList<>();
+//         inorder(root,list);
+//         return list;
+//     }
+//     public void inorder(TreeNode node,List<Integer> list){
+//         if(node==null){
+//             return;
+//         }
+//         inorder(node.left,list);
+//         list.add(node.val);
+//         inorder(node.right,list);
+//     }
+// }
+
+// Iterative Approach
+
 class Solution {
     public List<Integer> inorderTraversal(TreeNode root) {
         List<Integer> list=new ArrayList<>();
-        inorder(root,list);
+        if(root==null) return list;
+        Stack<TreeNode> stack=new Stack<>();
+        TreeNode current=root;
+        while(current!=null || !stack.isEmpty()){
+            while(current!=null){
+                stack.push(current);
+                current=current.left;
+            }
+            current=stack.pop();
+            list.add(current.val);
+
+            current=current.right;
+        }
         return list;
     }
-    public void inorder(TreeNode node,List<Integer> list){
-        if(node==null){
-            return;
-        }
-        inorder(node.left,list);
-        list.add(node.val);
-        inorder(node.right,list);
-    }
 }
-https://leetcode.com/problems/binary-tree-inorder-traversal/
