@@ -1,0 +1,78 @@
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+
+ // Solved using Queue easiest method
+// class Solution {
+//     public List<List<Integer>> zigzagLevelOrder(TreeNode root) {
+//         List<List<Integer>> result=new ArrayList<>();
+//         if(root==null) return result;
+//         Queue<TreeNode> queue=new LinkedList<>();
+//         queue.offer(root);
+//         Boolean leftToRight=true;
+//         while(!queue.isEmpty()){
+//             int size=queue.size();
+//             ArrayList<Integer> level=new ArrayList<>();
+//             for(int i=0;i<size;i++){
+//                 TreeNode node=queue.poll();
+//                 if(leftToRight){
+//                     level.add(node.val);
+//                 }
+//                 else{
+//                     level.add(0,node.val);
+//                 }
+//                 if(node.left!=null) queue.offer(node.left);
+//                 if(node.right!=null) queue.offer(node.right);
+//             }
+//             leftToRight=!leftToRight;
+//             result.add(level);
+//         }
+//         return result;
+//     }
+// }
+
+// Solved using Two stacks a little bit trickier
+class Solution {
+    public List<List<Integer>> zigzagLevelOrder(TreeNode root) {
+        List<List<Integer>> result=new ArrayList<>();
+        if(root==null) return result;
+        Stack<TreeNode> currentLevel=new Stack<>();
+        Stack<TreeNode> newLevel=new Stack<>();
+        currentLevel.add(root);
+        Boolean LeftToRight=true;
+        while(!currentLevel.isEmpty()){
+            List<Integer> level=new ArrayList<>();
+            while(!currentLevel.isEmpty()){
+                TreeNode node=currentLevel.pop();
+                level.add(node.val);
+                if(LeftToRight){
+                    if(node.left!=null) newLevel.add(node.left);
+                    if(node.right!=null) newLevel.add(node.right);
+                }
+                else{
+                    if(node.right!=null) newLevel.add(node.right);
+                    if(node.left!=null) newLevel.add(node.left);
+                }
+            }
+            result.add(level);
+            LeftToRight=!LeftToRight;
+            Stack<TreeNode> temp=currentLevel;
+            currentLevel=newLevel;
+            newLevel=temp;
+        }
+        return result;
+    }
+}
+https://leetcode.com/problems/binary-tree-zigzag-level-order-traversal/
