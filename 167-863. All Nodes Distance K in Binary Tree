@@ -1,0 +1,55 @@
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ */
+class Solution {
+    public List<Integer> distanceK(TreeNode root, TreeNode target, int k) {
+        List<Integer> result=new ArrayList<>();
+        if(root==null) return result;
+        Map<TreeNode,TreeNode> ParentMap=new HashMap<>();
+        ParentBataneWalaMap(root,null,ParentMap);
+        Queue<TreeNode> queue=new LinkedList<>();
+        Set<TreeNode> set=new HashSet<>();
+        queue.offer(target);
+        set.add(target);
+        int count=0;
+        while(!queue.isEmpty()){
+            int size=queue.size();
+            if(count==k) break;
+            for(int i=0;i<size;i++){
+                TreeNode node=queue.poll();
+                if(node.left!=null && !set.contains(node.left)){
+                   set.add(node.left);
+                   queue.offer(node.left);
+                }
+                if(node.right!=null && !set.contains(node.right)){
+                   set.add(node.right);
+                   queue.offer(node.right);
+                }
+                TreeNode parent=ParentMap.get(node);
+                if(parent!=null && !set.contains(parent)){
+                   set.add(ParentMap.get(node));
+                   queue.offer(ParentMap.get(node));
+                }
+            }
+            count++;
+        }
+        while(!queue.isEmpty()){
+            TreeNode node=queue.poll();
+            result.add(node.val);
+        }
+        return result;
+    }
+    public void ParentBataneWalaMap(TreeNode node,TreeNode parent,Map<TreeNode,TreeNode> ParentMap){
+        if(node==null) return;
+        ParentMap.put(node,parent);
+        ParentBataneWalaMap(node.left,node,ParentMap);
+        ParentBataneWalaMap(node.right,node,ParentMap);
+    }
+}
+https://leetcode.com/problems/all-nodes-distance-k-in-binary-tree/
