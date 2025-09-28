@@ -1,0 +1,44 @@
+/*
+class Node{
+    int data;
+    Node left,right;
+
+    Node(int key)
+    {
+        data = key;
+        left = right = null;
+    }
+}
+*/
+// Using BFS
+// class Solution {
+//     public boolean isSumProperty(Node root) {
+//         //  code here
+//         if(root==null) return true;
+//         Queue<Node> queue=new LinkedList<>();
+//         queue.offer(root);
+//         while(!queue.isEmpty()){
+//             Node node=queue.poll();
+//             if(node.left==null && node.right==null) continue;
+//             int leftVal=node.left!=null?node.left.data:0;
+//             int rightVal=node.right!=null?node.right.data:0;
+            
+//             if(node.data!=leftVal+rightVal) return false;
+//             if(node.left!=null) queue.offer(node.left);
+//             if(node.right!=null) queue.offer(node.right);
+//         }
+//         return true;
+//     }
+// }
+
+// Using Recursive Approach
+class Solution {
+    public boolean isSumProperty(Node root) {
+        //  code here
+        if(root==null || (root.left==null && root.right==null)) return true;
+        int leftVal=root.left!=null?root.left.data:0;
+        int rightVal=root.right!=null?root.right.data:0;
+        
+        return (leftVal+rightVal==root.data) && isSumProperty(root.left) && isSumProperty(root.right);
+    }
+}
