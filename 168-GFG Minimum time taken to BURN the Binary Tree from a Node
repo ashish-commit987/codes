@@ -1,0 +1,67 @@
+/*
+class Node {
+    int data;
+    Node left;
+    Node right;
+
+    Node(int data) {
+        this.data = data;
+        left = null;
+        right = null;
+    }
+}
+*/
+
+class Solution {
+    public int minTime(Node root, int target) {
+        // code here
+        int count=0;
+        Set<Node> set=new HashSet<>();
+        Queue<Node> queue=new LinkedList<>();
+        Map<Node,Node> map=new HashMap<>();
+        Node targetNode=convert(root,target);
+        ParentBataneWalaMethod(root,null,map);
+        queue.offer(targetNode);
+        set.add(targetNode);
+        while(!queue.isEmpty()){
+            int size=queue.size();
+            
+            for(int i=0;i<size;i++){
+                Node node=queue.poll();
+                if(node.left!=null && !set.contains(node.left)){
+                    queue.offer(node.left);
+                    set.add(node.left);
+                }
+                if(node.right!=null && !set.contains(node.right)){
+                    queue.offer(node.right);
+                    set.add(node.right);
+                }
+                Node parent=map.get(node);
+                if(parent!=null && !set.contains(parent)){
+                    queue.offer(parent);
+                    set.add(parent);
+                }
+            }
+            count++;
+        }
+        return count-1;
+    }
+    public Node convert(Node node,int target){
+        if(node==null) return null;
+        if(node.data==target) return node;
+        
+        Node left=convert(node.left,target);
+        if(left!=null) return left;
+        Node right=convert(node.right,target);
+        if(right!=null) return right;
+        
+        return null;
+    }
+    public void ParentBataneWalaMethod(Node node,Node parent,Map<Node,Node> map){
+        if(node==null) return;
+        map.put(node,parent);
+        ParentBataneWalaMethod(node.left,node,map);
+        ParentBataneWalaMethod(node.right,node,map);
+    }
+}
+https://www.geeksforgeeks.org/problems/burning-tree/1
