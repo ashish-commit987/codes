@@ -1,0 +1,22 @@
+class Solution {
+    public ArrayList<Integer> dfs(ArrayList<ArrayList<Integer>> adj) {
+        // code here
+        ArrayList<Integer> dSearch=new ArrayList<>();
+        boolean[] visited=new boolean[adj.size()];
+        helper(0,adj,visited,dSearch);
+        return dSearch;
+    }
+    
+    
+    public void helper(int node,ArrayList<ArrayList<Integer>> adj,boolean[] visited,ArrayList<Integer> dSearch){
+        visited[node]=true;
+        dSearch.add(node);
+        
+        for(int neighbor:adj.get(node)){
+            while(!visited[neighbor]){
+                helper(neighbor,adj,visited,dSearch);
+            }
+        }
+    }
+}
+https://www.geeksforgeeks.org/problems/depth-first-traversal-for-a-graph/0
