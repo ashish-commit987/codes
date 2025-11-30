@@ -1,0 +1,30 @@
+class Solution {
+    public int[][] floodFill(int[][] image, int sr, int sc, int color) {
+        int m=image.length;
+        int n=image[0].length;
+        int pixel=image[sr][sc];
+        if (pixel == color) return image;
+        int dirX[]=new int[]{1,-1,0,0};
+        int dirY[]=new int[]{0,0,1,-1};
+        Queue<int[]> q=new LinkedList<>();
+        q.add(new int[]{sr,sc});
+        image[sr][sc] = color;
+
+        while(!q.isEmpty()){
+                int curr[]=q.poll();
+                int x=curr[0];
+                int y=curr[1];
+                for(int d=0;d<4;d++){
+                    int nx=x+dirX[d];
+                    int ny=y+dirY[d];
+
+                    if(nx>=0 && ny>=0 && nx<m && ny<n && image[nx][ny]==pixel){
+                        image[nx][ny]=color;
+                        q.add(new int[]{nx,ny});
+                    }
+                }
+        }
+        return image;
+    }
+}
+https://leetcode.com/problems/flood-fill/
